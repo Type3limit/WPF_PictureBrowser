@@ -1,0 +1,66 @@
+﻿<Window x:Class="PicBrowser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PicBrowser"
+        mc:Ignorable="d"
+        Title="Picture Browser" Height="500" Width="800" WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <LinearGradientBrush x:Key="BackGroundBrush">
+            <GradientStop Offset="0" Color ="LightCyan"/>
+            <GradientStop Offset="1" Color="AliceBlue"/>
+        </LinearGradientBrush>
+    </Window.Resources>
+
+    
+    
+    <Grid x:Name="MainFrame" KeyDown="Grid_KeyDown" Focusable="True">
+        
+        
+        <!-- 行定义 -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" x:Name="ImageArea"/>
+            <RowDefinition Height="auto" x:Name="FunctionArea"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 列定义 -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="FileChooseButton" Grid.Row="1" Grid.Column="3" VerticalAlignment="Bottom" Height="35" 
+                Width="100" Content="文件选择" FontSize="15" FontWeight="Light" BorderBrush="AliceBlue" 
+                Click="FileChoose_Click" Background="{StaticResource BackGroundBrush}"/>
+        
+        
+        
+        <Button x:Name="FullScreenButton" Grid.Row="1"  Grid.Column ="0" VerticalAlignment="Bottom" Height="35" 
+                Width="100" Content="全屏预览" FontSize="15" FontWeight="Light" BorderBrush="AliceBlue"
+                Click="FullScreen_Click" Visibility="Hidden"  Background="{StaticResource BackGroundBrush}"/>
+        
+        
+        
+        <Slider x:Name="ImageZoom" Grid.Row="1" Grid.Column="1"  Margin="40,0,10,10"
+                 BorderBrush="AliceBlue" Maximum="100" Minimum="0" 
+                Value="{Binding  ZoomValue,ElementName=ImageBrowser}"
+                 Visibility="Hidden"  MouseMove="ImageZoom_MouseMove" />
+       
+        
+        
+        <Label x:Name="ZoomValueLabel" Grid.Row="1" Grid.Column="2"  VerticalAlignment="Center"
+               Visibility ="Hidden" HorizontalContentAlignment="Center" FontSize="17" Content="{Binding  ZoomValue,ElementName=ImageBrowser}"  />
+
+          
+         <local:MyImage x:Name="ImageBrowser" 
+                           Focusable="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"/>
+
+        
+        
+        
+    </Grid>
+</Window>
